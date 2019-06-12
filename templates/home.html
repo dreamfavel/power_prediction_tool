@@ -33,14 +33,23 @@
 					</div>
 					</form>
 					</div>
+
           {% block content %}
           {% endblock content %}
+
           {% if tag %}
           <div class="container">
             <div class="row">
                   <div class="col-md-12">
-                      <p><h2>Результат прогнозирования</h2>
-                        <a href="{% url 'figure' %}">Посмотреть график</a></p>
+                      <p><h2>Результат прогнозирования</h2></p>
+
+                        <div>
+                          {% if fig %}
+                          <a href="{% url 'figure' %}">Посмотреть график</a>
+                          {% endif %}
+                      </div>
+
+
                   </div>
               </div>
 

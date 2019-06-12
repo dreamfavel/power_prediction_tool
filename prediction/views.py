@@ -15,7 +15,10 @@ def home(request):
     #date = '18.04.2018 12:00'
     result = ''
     tag = ''
+    fig = ''
     if request.method == "POST":
+        tag = '0'
+
         date = request.POST.get("date")
 #        if ':' in date:
 
@@ -37,17 +40,25 @@ def home(request):
                 result['error'] = result['error'].round(2)
 
                 tag = '1'
-                result[['fact','predict']].plot(figsize=(10,8), grid=True,style = ['g-','b-'],
+                if len(result['predict']) <= 155:
+                    result[['fact','predict']].plot(figsize=(10,8), grid=True,style = ['g-','b-'],
                                                         linewidth=2,
-                                                        title='Результат прогнозування').set_ylabel("МВт")
+                                                        title='Результат прогнозирования').set_ylabel("МВт")
+                    fig = '1'
+
         else:
-            result[['predict']].plot(figsize=(10,8), grid=True,style = ['g-'],
+            if len(result['predict']) <= 155:
+                result[['predict']].plot(figsize=(10,8), grid=True,style = ['g-'],
                                                     linewidth=2,
-                                                    title='Результат прогнозування').set_ylabel("МВт")
-            tag = '0'
+                                                title='Результат прогнозирования').set_ylabel("МВт")
+                fig = '1'
+
+        print('SFSFDSFSFSFSFSDFDSFDSFSDF',len(result['predict']))
         plt.savefig('static/figure.png')
+        print(fig)
+        print(check_current)
     return render(request, 'home.html',
-                    {"result":result, "tag":tag},)
+                    {"result":result, "tag":tag, "fig":fig },)
 
 def figure(request):
-    return render(request, 'figure.html')
+    return render(request, 'figure.html',)
