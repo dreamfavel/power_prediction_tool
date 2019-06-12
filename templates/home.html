@@ -3,31 +3,51 @@
 <head>
     <!--	Required	meta	tags	-->
     <meta	charset="utf-8">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
+    integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"
+    integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous">
+    </script>
 		<title>{% block title %}ENERGY PREDICTION APPLICATION{% endblock title %}</title>
 </head>
 <script type="text/javascript"></script>
 
 <body>
-
     <div class="container">
+      <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+           <a class="navbar-brand" href="{% url 'home' %}">Главная страница</a>
+           <a class="navbar-brand" href="{% url 'home' %}">Руководство и описание</a>
+         </nav>
+
+      <div class="panel-footer"><span id="url-result">Введите нужную дату в форму снизу и нажмите "Предсказать"!</span></div>
 			<div class="panel panel-default">
 					<div class="panel-body">
 					<form method="POST" action="/">
 					<div class="col-sm-9">
-					<input type="text" name="date" id="date" class="form-control input-sm" placeholder="something like 12.04.2019 13:00" />
+					<input type="text" name="date" id="date" class="form-control input-sm" placeholder="something like 12.04.2019 13:00 or 12.04.2019-11.09.2019" />
 					</div>
 					<div class="col-sm-3">
 					{% csrf_token %}
-					<button id="submitButton" class="btn btn-primary">Submit</button></p>
+					<button id="submitButton" class="btn btn-primary">Предсказать</button></p>
 					</div>
 					</form>
 					</div>
-					<div class="panel-footer"><span id="url-result">Enter date to form above and click submit!</span></div>
+          {% block content %}
+          {% endblock content %}
+          {% if tag %}
+          <div class="container">
+            <div class="row">
+                  <div class="col-md-12">
+                      <p><h2>Результат прогнозирования</h2>
+                        <a href="{% url 'figure' %}">Посмотреть график</a></p>
+                  </div>
+              </div>
 
-
-              <table>
-                <thead>
+          <div class="row">
+            <dov class="col-md-12">
+              <table class="table table-striped">
+                <thead class="thead-inverse">
                   <tr>
                     <th>Дата</th>
                     <th>Прогноз, кВт</th>
@@ -37,7 +57,7 @@
                     {% endif %}
                   </tr>
                 </thead>
-                <tbody>
+                <tbody class='table-striped'>
                   {% for i, b, c, d in result.itertuples %}
                   <tr>
                     <td>{{ i }}</td>
@@ -51,9 +71,17 @@
 
                 </tbody>
               </table>
-
-
+            </dov>
+          </div>
+          </div>
+        {% endif %}
 			</div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
+    integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous">
+    </script>
 </body>
 </html>
