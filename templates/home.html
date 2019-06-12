@@ -1,0 +1,59 @@
+<!DOCTYPE	html>
+<html lang="en">
+<head>
+    <!--	Required	meta	tags	-->
+    <meta	charset="utf-8">
+
+		<title>{% block title %}ENERGY PREDICTION APPLICATION{% endblock title %}</title>
+</head>
+<script type="text/javascript"></script>
+
+<body>
+
+    <div class="container">
+			<div class="panel panel-default">
+					<div class="panel-body">
+					<form method="POST" action="/">
+					<div class="col-sm-9">
+					<input type="text" name="date" id="date" class="form-control input-sm" placeholder="something like 12.04.2019 13:00" />
+					</div>
+					<div class="col-sm-3">
+					{% csrf_token %}
+					<button id="submitButton" class="btn btn-primary">Submit</button></p>
+					</div>
+					</form>
+					</div>
+					<div class="panel-footer"><span id="url-result">Enter date to form above and click submit!</span></div>
+
+
+              <table>
+                <thead>
+                  <tr>
+                    <th>Дата</th>
+                    <th>Прогноз, кВт</th>
+                    {% if tag == "1" %}
+                    <th>Факт, кВт</th>
+                    <th>Ошибка, %</th>
+                    {% endif %}
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for i, b, c, d in result.itertuples %}
+                  <tr>
+                    <td>{{ i }}</td>
+                    <td>{{ b }}</td>
+                    {% if tag == "1" %}
+                    <td>{{ c }}</td>
+                    <td>{{ d }}</td>
+                    {% endif %}
+                  </tr>
+                  {% endfor %}
+
+                </tbody>
+              </table>
+
+
+			</div>
+    </div>
+</body>
+</html>
