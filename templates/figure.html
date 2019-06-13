@@ -1,6 +1,7 @@
 {% extends 'home.html' %}
 {% block content %}
 {% load static %}
+  <input type=button value="Вернуться к таблице" onClick="javascript:history.go(-1);">
   <img src="{% static 'figure.png'%}" alt="Результат">
 
 {% endblock content %}
