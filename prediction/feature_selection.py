@@ -66,5 +66,17 @@ def Energy_Parcer():
 def actual_value(dct):
     data = pd.DataFrame(Energy_Parcer())
     data['date'] = pd.to_datetime(data['date'])
-    
+
     return(list(data.value[(data.date >= dct['begin'])&(data.date <= dct['current'])]))
+
+def add_sum(df):
+    summ = pd.DataFrame(df.sum(), columns = ['СУММАРНОЕ ЗНАЧЕНИЕ']).T.round(2)
+    if 'fact' not in df.columns:
+        summ['fact'] = [None]
+    summ['error'] = [None]
+    return (summ)
+
+def errors(df):
+    df['error'] = 100*abs(df['fact'] - df['predict'])/df['fact']
+    df['error'] = df['error'].round(2)
+    return df

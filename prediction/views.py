@@ -16,6 +16,7 @@ def home(request):
     result = ''
     tag = ''
     fig = ''
+    summ = ''
     if request.method == "POST":
         tag = '0'
 
@@ -36,15 +37,17 @@ def home(request):
             actual = feature_selection.actual_value(check_current)
             if len(actual) == len(result['predict']):
                 result['fact'] = actual
-                result['error'] = 100*abs(result['fact'] - result['predict'])/result['fact']
-                result['error'] = result['error'].round(2)
-
                 tag = '1'
                 if len(result['predict']) <= 155:
                     result[['fact','predict']].plot(figsize=(10,8), grid=True,style = ['g-','b-'],
                                                         linewidth=2,
                                                         title='Результат прогнозирования').set_ylabel("МВт")
                     fig = '1'
+                summ = feature_selection.add_sum(result)
+                print(summ)
+                result = feature_selection.errors(result)
+                summ = feature_selection.errors(summ)
+
 
         else:
             if len(result['predict']) <= 155:
@@ -52,13 +55,14 @@ def home(request):
                                                     linewidth=2,
                                                 title='Результат прогнозирования').set_ylabel("МВт")
                 fig = '1'
+            summ = feature_selection.add_sum(result)
 
-        print('SFSFDSFSFSFSFSDFDSFDSFSDF',len(result['predict']))
+
         plt.savefig('static/figure.png')
-        print(fig)
-        print(check_current)
+
+
     return render(request, 'home.html',
-                    {"result":result, "tag":tag, "fig":fig },)
+                    {"result":result, "summ":summ, "tag":tag, "fig":fig },)
 
 def figure(request):
     return render(request, 'figure.html',)

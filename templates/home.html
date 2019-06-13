@@ -77,6 +77,16 @@
                     {% endif %}
                   </tr>
                   {% endfor %}
+                  {% for i, b, c, d in summ.itertuples %}
+                  <tr>
+                    <td><b>{{ i }}</b></td>
+                    <td><b>{{ b }}</b></td>
+                    {% if tag == "1" %}
+                    <td><b>{{ c }}</b></td>
+                    <td><b>{{ d }}</b></td>
+                    {% endif %}
+                  </tr>
+                  {% endfor %}
 
                 </tbody>
               </table>
