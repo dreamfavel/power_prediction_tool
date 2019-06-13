@@ -34,6 +34,8 @@ def home(request):
         result['fact'] = [None for i in range(len(result['predict']))]
         result['error'] = [None for i in range(len(result['predict']))]
         result['predict']=result['predict'].astype(float).round(2)
+        summ = feature_selection.add_sum(result)
+
         if check_current['past']:
             actual = feature_selection.actual_value(check_current)
             if len(actual) == len(result['predict']):
@@ -56,11 +58,11 @@ def home(request):
                                                     linewidth=2,
                                                 title='Результат прогнозирования').set_ylabel("МВт")
                 fig = '1'
-            summ = feature_selection.add_sum(result)
 
 
         plt.savefig('static/figure.png')
-
+        result.append(summ).to_excel('static/result.xlsx')
+        #feature_selection.pd.concat(lst).to_excel('result.xls')
 
     return render(request, 'home.html',
                     {"result":result, "summ":summ, "tag":tag, "fig":fig, "date":date },)

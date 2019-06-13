@@ -47,6 +47,8 @@
                           {% if fig %}
                           <a href="{% url 'figure' %}">Посмотреть график</a>
                           {% endif %}
+                          {% load static %}
+                          <a href="{% static 'result.xlsx' %}">Скачать excel</a>
                       </div>
 
 
