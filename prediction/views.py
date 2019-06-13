@@ -17,6 +17,7 @@ def home(request):
     tag = ''
     fig = ''
     summ = ''
+    date = ''
     if request.method == "POST":
         tag = '0'
 
