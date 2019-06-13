@@ -62,7 +62,7 @@ def home(request):
 
 
     return render(request, 'home.html',
-                    {"result":result, "summ":summ, "tag":tag, "fig":fig },)
+                    {"result":result, "summ":summ, "tag":tag, "fig":fig, "date":date },)
 
 def figure(request):
     return render(request, 'figure.html',)

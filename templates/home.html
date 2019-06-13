@@ -25,7 +25,7 @@
 					<div class="panel-body">
 					<form method="POST" action="/">
 					<div class="col-sm-9">
-					<input type="text" name="date" id="date" class="form-control input-sm" placeholder="something like 12.04.2019 13:00 or 12.04.2019-11.09.2019" />
+					<input type="text" name="date" id="date" class="form-control input-sm" placeholder="something like 12.04.2019 or 12.04.2019-11.09.2019" />
 					</div>
 					<div class="col-sm-3">
 					{% csrf_token %}
@@ -41,7 +41,7 @@
           <div class="container">
             <div class="row">
                   <div class="col-md-12">
-                      <p><h2>Результат прогнозирования</h2></p>
+                      <p><h2>Результат прогнозирования на "{{ date }}"</h2></p>
 
                         <div>
                           {% if fig %}
