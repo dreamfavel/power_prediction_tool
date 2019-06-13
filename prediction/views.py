@@ -39,7 +39,7 @@ def home(request):
             if len(actual) == len(result['predict']):
                 result['fact'] = actual
                 tag = '1'
-                if len(result['predict']) <= 155:
+                if len(result['predict']) <= 24*7:
                     result[['fact','predict']].plot(figsize=(10,8), grid=True,style = ['g-','b-'],
                                                         linewidth=2,
                                                         title='Результат прогнозирования').set_ylabel("МВт")
@@ -51,7 +51,7 @@ def home(request):
 
 
         else:
-            if len(result['predict']) <= 155:
+            if len(result['predict']) <= 24*7:
                 result[['predict']].plot(figsize=(10,8), grid=True,style = ['g-'],
                                                     linewidth=2,
                                                 title='Результат прогнозирования').set_ylabel("МВт")
