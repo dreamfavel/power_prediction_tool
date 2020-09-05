@@ -60,7 +60,7 @@ def Energy_Parcer():
 
     headers = {}
     over = {'action':'get_data_oes', 'report_date': '27.11.2018', 'type':'consumption', 'rnd': '0.478195319721614'} # параметры запроса
-    return requests.post(url, data=over, json=payload).json()
+    return requests.post(url, data=over, headers=payload).json()
 
 
 def actual_value(dct):

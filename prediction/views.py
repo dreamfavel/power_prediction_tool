@@ -24,7 +24,8 @@ def home(request):
         date = request.POST.get("date")
 #        if ':' in date:
 
-        reg = pickle.load(open((settings.BASE_DIR + '/prediction/XGB.pkl'), 'rb'))
+        with open((settings.BASE_DIR + '/prediction/XGB.pkl'), 'rb') as f:
+            reg = pickle.load(f)
         df = feature_selection.separate_data(date)
 
         result = reg.predict(feature_selection.create_features(df))
